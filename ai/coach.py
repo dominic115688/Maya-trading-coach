@@ -7,6 +7,8 @@ def get_ai_coach_response(prompt: str, language: str = "English") -> str:
     Calls the Gemini API to generate Maya's trading coach response.
     """
     api_key = st.secrets.get("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY"))
+    
+    # Initialize client with the API key
     client = genai.Client(api_key=api_key)
     
     system_prompt = (
@@ -18,7 +20,7 @@ def get_ai_coach_response(prompt: str, language: str = "English") -> str:
     
     try:
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-3.6-flash',
             contents=prompt,
             config={
                 'system_instruction': system_prompt,
